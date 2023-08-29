@@ -2,18 +2,70 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
 
+/*
+  Beginner: 👶
+  Intermediate: 👍
+  Advanced: 💪
+*/
+
+const skills = [
+  {
+    skill: "C++",
+    level: "advanced",
+    color: "#2662EA",
+  },
+  {
+    skill: "C#",
+    level: "advanced",
+    color: "#EFD81D",
+  },
+  {
+    skill: "Java",
+    level: "advanced",
+    color: "#C3DCAF",
+  },
+  {
+    skill: "Git and GitHub",
+    level: "intermediate",
+    color: "#E84F33",
+  },
+  {
+    skill: "React",
+    level: "beginner",
+    color: "#60DAFB",
+  },
+  {
+    skill: "HTML + CSS",
+    level: "intermediate",
+    color: "#FF3B00",
+  },
+];
+
 function App() {
   return (
-    <div className="card">
-      <Avatar />
-      <div className="data">
-        <Intro />
-        {/* Should contain one Skill component
+    <>
+      <Header />
+      <div className="card">
+        <Avatar />
+        <div className="data">
+          <Intro />
+          {/* Should contain one Skill component
         for each web dev skill that you have,
         customized with props */}
-        <SkillList />
+          <SkillList />
+        </div>
       </div>
-    </div>
+    </>
+  );
+}
+
+function Header() {
+  // const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
+
+  return (
+    <header className="header">
+      <h1>React Profile Card</h1>
+    </header>
   );
 }
 
@@ -36,21 +88,28 @@ function Intro() {
 
 function SkillList() {
   return (
-    <div className="skill-list">
-      <Skill skill="C++" color="gray" />
-      <Skill skill="C#" color="green" />
-      <Skill skill="Java" color="red" />
-      <Skill skill="HTML + CSS" color="purple" />
-      <Skill skill="Javascript/Typescript" color="orange" />
-      <Skill skill="React" color="blue" />
-    </div>
+    <ul className="skill-list">
+      {skills.map((skill) => (
+        <Skill
+          skill={skill.skill}
+          color={skill.color}
+          level={skill.level}
+          key={skill.skill}
+        />
+      ))}
+    </ul>
   );
 }
 
-function Skill(props) {
+function Skill({ skill, color, level }) {
   return (
-    <div className="skill" style={{ backgroundColor: props.color }}>
-      <span>{props.skill}</span>
+    <div className="skill" style={{ backgroundColor: color }}>
+      <span>{skill}</span>
+      <span>
+        {level === "beginner" && "👶"}
+        {level === "intermediate" && "👍"}
+        {level === "advanced" && "💪"}
+      </span>
     </div>
   );
 }
